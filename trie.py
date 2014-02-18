@@ -53,12 +53,15 @@ class Trie:
 
 def main():
 	myTrie = Trie()
+
 	myTrie.insert("dog")
 	myTrie.insert("dad")
 	myTrie.insert("cat")
 	myTrie.insert("dogma")
 
-	for word in myTrie.recommendations("d"):
+	substring = raw_input("Enter string: ")
+
+	for word in myTrie.recommendations(substring):
 		print word
 
 if __name__ == '__main__':
