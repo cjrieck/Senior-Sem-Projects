@@ -1,7 +1,8 @@
 class Node:
-	def __init__(self, cargo):
+	def __init__(self, cargo, end=False):
 		self.cargo = cargo
 		self.next = {}
+		self.end = end
 
 class Trie:
 	def __init__(self):
@@ -10,22 +11,16 @@ class Trie:
 	def insert(self, word):
 		current = self.root
 
-		for letter in word:
-			if current.next.has_key(letter):
-				current = current.next[letter]
+		for letter in range(len(word)):
+			if current.next.has_key(word[letter]):
+				current = current.next[word[letter]]
 			else:
-				current.next[letter] = Node(letter)
-				current = current.next[letter]
-
-	# def search(self, word):
-	# 	current = self.root
-
-	# 	for letter in word:
-	# 		if current.next.has_key(letter):
-	# 			current = current.next[letter]
-	# 		else:
-	# 			return False
-	# 	return True
+				if letter == len(word)-1:
+					current.next[word[letter]] = Node(word[letter])
+					current.next[word[letter]].end = True
+				else:
+					current.next[word[letter]] = Node(word[letter])
+					current = current.next[word[letter]]
 
 	def traverse(self, word):
 		current = self.root
@@ -39,7 +34,7 @@ class Trie:
 
 	def recommend(self, word, node, words=[]):
 		
-		if node.next.keys() == []:
+		if node.next.keys() == [] or node.end == True:
 			words.append(word)
 
 		for letter in node.next.keys():
@@ -61,7 +56,8 @@ def main():
 	myTrie.insert("dog")
 	myTrie.insert("dad")
 	myTrie.insert("cat")
-	
+	myTrie.insert("dogma")
+
 	for word in myTrie.recommendations("d"):
 		print word
 
