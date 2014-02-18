@@ -28,17 +28,32 @@ class Trie:
 		return True
 
 	def traverse(self, word):
-		
+		current = self.root
 
-	def recommend(self, word, words, node):
+		for letter in word:
+			if current.next.has_key(letter):
+				current = current.next[letter]
+			else:
+				return False
+		return current
+
+	def recommend(self, word, node, words=[]):
 		
 		if node.next.keys() == []:
 			words.append(word)
 
 		for letter in node.next.keys():
-			if current.next.has_key(letter):
-				self.recommend(word + letter, words, node.next[letter])
+			if node.next.has_key(letter):
+				self.recommend(word + letter, node.next[letter], words)
 
+		return words
+
+	def recommendations(self, word):
+		startingNode = self.traverse(word)
+		if not startingNode:
+			return "no words found"
+
+		words = self.recommend(word, startingNode)
 		return words
 
 def main():
@@ -46,9 +61,8 @@ def main():
 	myTrie.insert("dog")
 	myTrie.insert("dad")
 	myTrie.insert("cat")
-	# print myTrie.search("dog")
-	# print myTrie.search("da")
-	print myTrie.recommend("d", [], myTrie.root)
+	for word in myTrie.recommendations("d"):
+		print word
 
 if __name__ == '__main__':
 	main()
