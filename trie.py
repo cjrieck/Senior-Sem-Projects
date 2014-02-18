@@ -27,18 +27,28 @@ class Trie:
 				return False
 		return True
 
-	def recommend(self, substring, node):
-		current = self.root
+	def traverse(self, word):
+		
 
-		if self.search(substring):
-			for letter in substring:
-				
+	def recommend(self, word, words, node):
+		
+		if node.next.keys() == []:
+			words.append(word)
 
+		for letter in node.next.keys():
+			if current.next.has_key(letter):
+				self.recommend(word + letter, words, node.next[letter])
+
+		return words
 
 def main():
 	myTrie = Trie()
 	myTrie.insert("dog")
-	print myTrie.search("dog")
+	myTrie.insert("dad")
+	myTrie.insert("cat")
+	# print myTrie.search("dog")
+	# print myTrie.search("da")
+	print myTrie.recommend("d", [], myTrie.root)
 
 if __name__ == '__main__':
 	main()
