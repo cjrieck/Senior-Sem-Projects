@@ -22,7 +22,7 @@ class Trie:
 					current.next[word[letter]] = Node(word[letter])
 					current = current.next[word[letter]]
 
-	def traverse(self, word):
+	def traverse(self, word): # got to end of substring typed in in trie
 		current = self.root
 
 		for letter in word:
@@ -34,17 +34,17 @@ class Trie:
 
 	def recommend(self, word, node, words=[]):
 		
-		if node.next.keys() == [] or node.end == True:
+		if node.next.keys() == [] or node.end == True: # if at end of branch or word
 			words.append(word)
 
-		for letter in node.next.keys():
-			if node.next.has_key(letter):
-				self.recommend(word + letter, node.next[letter], words)
+		for letter in node.next.keys(): # loop through dictionary values
+			self.recommend(word + letter, node.next[letter], words) # recursive call
 
 		return words
 
 	def recommendations(self, word):
 		startingNode = self.traverse(word)
+
 		if not startingNode:
 			return "no words found"
 
