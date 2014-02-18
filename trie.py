@@ -17,15 +17,15 @@ class Trie:
 				current.next[letter] = Node(letter)
 				current = current.next[letter]
 
-	def search(self, word):
-		current = self.root
+	# def search(self, word):
+	# 	current = self.root
 
-		for letter in word:
-			if current.next.has_key(letter):
-				current = current.next[letter]
-			else:
-				return False
-		return True
+	# 	for letter in word:
+	# 		if current.next.has_key(letter):
+	# 			current = current.next[letter]
+	# 		else:
+	# 			return False
+	# 	return True
 
 	def traverse(self, word):
 		current = self.root
@@ -61,6 +61,7 @@ def main():
 	myTrie.insert("dog")
 	myTrie.insert("dad")
 	myTrie.insert("cat")
+	
 	for word in myTrie.recommendations("d"):
 		print word
 
