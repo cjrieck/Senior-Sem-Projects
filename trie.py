@@ -22,7 +22,9 @@ class Trie:
 					current.next[word[letter]] = Node(word[letter])
 					current = current.next[word[letter]]
 
-	def traverse(self, word): # got to end of substring typed in in trie
+	# go to end of substring typed in in trie
+	# (move to new root)
+	def traverse(self, word):
 		current = self.root
 
 		for letter in word:
@@ -32,6 +34,7 @@ class Trie:
 				return False
 		return current
 
+	# get all words starting at that new root
 	def recommend(self, word, node, words=[]):
 		
 		if node.next.keys() == [] or node.end == True: # if at end of branch or word
@@ -42,6 +45,7 @@ class Trie:
 
 		return words
 
+	# wrapper method to minimize method calls in main
 	def recommendations(self, word):
 		startingNode = self.traverse(word)
 

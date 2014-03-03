@@ -22,7 +22,7 @@ class Trie:
 					current.next[word[letter]] = Node(word[letter])
 					current = current.next[word[letter]]
 
-	
+	# enter code here
 
 def main():
 	myTrie = Trie()
