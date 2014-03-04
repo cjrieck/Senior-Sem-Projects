@@ -37,5 +37,5 @@ class Trie:
 Create an Auto Complete system that gives word recommendations
 given an inputted string. For example, if the Trie contained the words
 "dog", "dad" and "dogma" and the user entered "d" the output should
-yield ["dog", "dogma", "dad"] (order doesn't matter and you can
+yield "dog", "dogma", "dad" (order doesn't matter and you can
 output the result in the form of a list or on new lines)
